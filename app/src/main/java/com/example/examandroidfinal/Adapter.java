@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -57,8 +58,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(v.getContext(), "Clicked -> " + getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    AppCompatActivity activity=(AppCompatActivity) v.getContext();
+                    VehicleDetailFragment vehicleDetailFragment=new VehicleDetailFragment(titles.get(getAdapterPosition()),images.get((getAdapterPosition())));
+
+                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.main,vehicleDetailFragment).addToBackStack(null).commit();
                 }
             });
+
         }
     }
 }
